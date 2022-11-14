@@ -8,6 +8,8 @@ from src.resources.student_resource import StudentResource
 @app.route('/api/students/new_student', methods=['POST'])
 def add_new_student():
     data = request.json
+
+    # change to checking by search_by_student_uni()
     if StudentResource.get_student_uni(data['first_name'],
                                        data['last_name'],
                                        data['nationality'],
@@ -35,6 +37,7 @@ def add_new_student():
 def get_one_student(uni):
     student = StudentResource.search_student_by_uni(uni)
 
+    # need to parse the Student object into a dictionary before jsonifying
     response = jsonify(student)
     response.status_code = 200
     return response
@@ -44,10 +47,12 @@ def get_one_student(uni):
 def get_all_students():
     students = StudentResource.search_all_students()
 
+    # need to parse this list of student objects into a list of dictionaries before jsonifying
     response = jsonify(students)
     response.status_code = 200
     return response
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5011)
+    # this microservice runs on port number 5013
+    app.run(host="0.0.0.0", port=5013)
