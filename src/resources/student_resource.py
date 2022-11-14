@@ -19,20 +19,33 @@ class StudentResource:
         db.session.commit()
 
     @staticmethod
-    def get_student_uni(first_name, last_name, nationality, ethnicity, gender, admission_date):
-        return db.session.query(Student.uni).filter_by(first_name=first_name,
-                                                       last_name=last_name,
-                                                       nationality=nationality,
-                                                       ethnicity=ethnicity,
-                                                       gender=gender,
-                                                       admission_date=admission_date).first()
-
-    @staticmethod
     def search_student_by_uni(student_uni):
-        return db.session.query(Student).filter_by(uni=student_uni).first()
+        res = db.session.query(Student).filter_by(uni=student_uni).first()
+        if res is None:
+            return {}
+
+        student_list = []
+        StudentResource.parse_student_info(res, student_list)
+        return student_list
 
     @staticmethod
     def search_all_students():
-        return db.session.query(Student).all()
+        students = db.session.query(Student).all()
 
+        student_list = []
+        for student in students:
+            StudentResource.parse_student_info(students, student_list)
 
+        return student_list
+
+    @staticmethod
+    def parse_student_info(students, student_list):
+        for student in students:
+            student_dict = {'uni': student.uni,
+                            'first_name': student.first_name,
+                            'last_name': student.last_name,
+                            'nationality': student.nationality,
+                            'ethnicity': student.ethnicity,
+                            'gender': student.gender,
+                            'admission_date': student.admission_date}
+            student_list.append(student_dict)
