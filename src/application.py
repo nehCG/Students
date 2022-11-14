@@ -18,7 +18,8 @@ def add_new_student():
         response.status_code = 400
         return response
 
-    StudentResource.add_new_student(data['first_name'],
+    StudentResource.add_new_student(data['uni'],
+                                    data['first_name'],
                                     data['last_name'],
                                     data['nationality'],
                                     data['ethnicity'],
@@ -26,6 +27,24 @@ def add_new_student():
                                     data['admission_date'])
 
     response = jsonify('Successfully added')
+    response.status_code = 200
+    return response
+
+
+@app.route('/api/students/uni', methods=['GET'])
+def get_one_student(uni):
+    student = StudentResource.search_student_by_uni(uni)
+
+    response = jsonify(student)
+    response.status_code = 200
+    return response
+
+
+@app.route('/api/students', methods=['GET'])
+def get_all_students():
+    students = StudentResource.search_all_students()
+
+    response = jsonify(students)
     response.status_code = 200
     return response
 

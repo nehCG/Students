@@ -8,6 +8,6 @@ class Student(db.Model):
     first_name = db.Column(db.String(32), nullable=False)
     last_name = db.Column(db.String(32), nullable=False)
     nationality = db.Column(db.String(64), nullable=False)
-    ethnicity = db.Column(db.String(32), nullable=True)
-    gender = db.Column(db.String(32), nullable=True)
+    ethnicity = db.Column(db.String(32), nullable=False)
+    gender = db.Column(db.String(32), nullable=False)
     admission_date = db.Column(db.String(64), nullable=False)
