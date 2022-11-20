@@ -7,15 +7,20 @@ from src.resources.student_resource import StudentResource
 
 @app.route('/api/students/new_student', methods=['POST'])
 def add_new_student():
+    """JSON copy to test on Postman
+    {
+        "uni": ab1234
+        "first_name": David
+        "last_name": Martin
+        "nationality": United States
+        "ethnicity": White
+        "gender": Male
+        "admission_date": 12/14/2022
+    }
+    """
     data = request.json
 
-    # change to checking by search_by_student_uni()
-    if StudentResource.get_student_uni(data['first_name'],
-                                       data['last_name'],
-                                       data['nationality'],
-                                       data['ethnicity'],
-                                       data['gender'],
-                                       data['admission_date']) is not None:
+    if StudentResource.search_student_by_uni(data['uni']) is not None:
         response = jsonify('Student already exists!')
         response.status_code = 400
         return response
@@ -35,9 +40,19 @@ def add_new_student():
 
 @app.route('/api/students/uni', methods=['GET'])
 def get_one_student(uni):
+    """JSON copy to test on Postman
+    {
+        "uni": ab1234
+        "first_name": David
+        "last_name": Martin
+        "nationality": United States
+        "ethnicity": White
+        "gender": Male
+        "admission_date": 12/14/2022
+    }
+    """
     student = StudentResource.search_student_by_uni(uni)
 
-    # need to parse the Student object into a dictionary before jsonifying
     response = jsonify(student)
     response.status_code = 200
     return response
@@ -45,9 +60,24 @@ def get_one_student(uni):
 
 @app.route('/api/students', methods=['GET'])
 def get_all_students():
+    """JSON copy to test on Postman
+    {
+        {
+            "uni": ab1234
+            "first_name": David
+            "last_name": Martin
+            "nationality": United States
+            "ethnicity": White
+            "gender": Male
+            "admission_date": 12/14/2022
+        },
+        {
+            (second student)
+        }
+    }
+    """
     students = StudentResource.search_all_students()
 
-    # need to parse this list of student objects into a list of dictionaries before jsonifying
     response = jsonify(students)
     response.status_code = 200
     return response
