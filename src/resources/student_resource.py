@@ -25,7 +25,7 @@ class StudentResource:
             return {}
 
         student_list = []
-        StudentResource.parse_student_info(res, student_list)
+        StudentResource.parse_student_info([res], student_list)
         return student_list
 
     @staticmethod

@@ -38,11 +38,23 @@ def add_new_student():
     return response
 
 
-@app.route('/api/students/uni', methods=['GET'])
+@app.route('/api/students/<uni>', methods=['GET'])
 def get_one_student(uni):
-    """JSON copy to test on Postman
+    """ repsonse body be like
+    [
+        {
+            "admission_date": "12/08/2022",
+            "ethnicity": "Asian",
+            "first_name": "Di",
+            "gender": "Female",
+            "last_name": "Wu",
+            "nationality": "China",
+            "uni": "dw3013"
+        }
+    ]
     """
     student = StudentResource.search_student_by_uni(uni)
+    print(student)
 
     response = jsonify(student)
     response.status_code = 200
