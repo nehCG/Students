@@ -111,6 +111,28 @@ def get_one_student(uni):
     return response
 
 
+# @app.route('/api/students', methods=['GET'])
+# def search_student():
+#     """ JSON copy to test
+#     {
+#         "admission_date": "",
+#         "ethnicity": "Asian",
+#         "first_name": "",
+#         "gender": "",
+#         "last_name": "",
+#         "nationality": "",
+#         "uni": ""
+#     }
+#     """
+#     data = request.json
+#
+#     student = StudentResource.search_student_by_uni(uni)
+#
+#     response = jsonify(student)
+#     response.status_code = 200
+#     return response
+
+
 @app.route('/api/students', methods=['GET'])
 def get_all_students():
     """JSON copy to test on Postman
