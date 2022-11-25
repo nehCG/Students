@@ -19,7 +19,6 @@ def add_new_student():
     }
     """
     data = request.json
-
     if StudentResource.search_student_by_uni(data['uni']) is not None:
         response = jsonify('Student already exists!')
         response.status_code = 400
@@ -34,6 +33,58 @@ def add_new_student():
                                     data['admission_date'])
 
     response = jsonify('Successfully added')
+    response.status_code = 200
+    return response
+
+
+@app.route("/api/students/del_student", methods=['POST'])
+def del_a_student():
+    """JSON copy to test on Postman
+    {
+        "uni": "12345678"
+    }
+    """
+    data = request.json
+    if StudentResource.search_student_by_uni(data['uni']) is None:
+        response = jsonify('Student does not exist!')
+        response.status_code = 400
+        return response
+
+    StudentResource.del_a_student(data['uni'])
+
+    response = jsonify('Successfully deleted')
+    response.status_code = 302
+    return response
+
+
+@app.route("/api/students/update_student", methods=['POST'])
+def update_a_student():
+    """ JSON copy to test on Postman
+    {
+        "uni": "ab1234",
+        "first_name": "Daviiiid",
+        "last_name": "Martin",
+        "nationality": "United States",
+        "ethnicity": "White",
+        "gender": "Male",
+        "admission_date": "12/14/2022"
+    }
+    """
+    data = request.json
+    if StudentResource.search_student_by_uni(data['uni']) is None:
+        response = jsonify('Student does not exist!')
+        response.status_code = 400
+        return response
+
+    StudentResource.update_a_student(data['uni'],
+                                     data['first_name'],
+                                     data['last_name'],
+                                     data['nationality'],
+                                     data['ethnicity'],
+                                     data['gender'],
+                                     data['admission_date'])
+
+    response = jsonify('Successfully updated')
     response.status_code = 200
     return response
 

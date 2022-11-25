@@ -19,10 +19,28 @@ class StudentResource:
         db.session.commit()
 
     @staticmethod
+    def del_a_student(uni):
+        student = db.session.query(Student).filter_by(uni=uni).first()
+        db.session.delete(student)
+        db.session.commit()
+
+    @staticmethod
+    def update_a_student(uni, first_name, last_name, nationality, ethnicity, gender, admission_date):
+        student = db.session.query(Student).filter_by(uni=uni).update({
+                          'uni': uni,
+                          'first_name': first_name,
+                          'last_name': last_name,
+                          'nationality': nationality,
+                          'ethnicity': ethnicity,
+                          'gender': gender,
+                          'admission_date': admission_date})
+        db.session.commit()
+
+    @staticmethod
     def search_student_by_uni(student_uni):
         res = db.session.query(Student).filter_by(uni=student_uni).first()
         if res is None:
-            return {}
+            return None
 
         student_list = []
         StudentResource.parse_student_info([res], student_list)
