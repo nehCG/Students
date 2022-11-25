@@ -33,8 +33,7 @@ class StudentResource:
         students = db.session.query(Student).all()
 
         student_list = []
-        for student in students:
-            StudentResource.parse_student_info(students, student_list)
+        StudentResource.parse_student_info(students, student_list)
 
         return student_list
 
