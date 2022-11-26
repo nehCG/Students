@@ -19,8 +19,7 @@ def add_new_student():
     }
     """
     data = request.json
-
-    if StudentResource.search_student_by_uni(data['uni']) is None:
+    if StudentResource.search_student_by_uni(data['uni']) is not None:
         response = jsonify('Student already exists!')
         response.status_code = 400
         return response
@@ -38,7 +37,7 @@ def add_new_student():
     return response
 
 
-@app.route('/api/students/uni', methods=['GET'])
+@app.route('/api/students/<uni>', methods=['GET'])
 def get_one_student(uni):
     """JSON copy to test on Postman
     """

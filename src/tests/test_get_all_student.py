@@ -1,41 +1,21 @@
-import json
+import unittest
+import requests
 
-from .BaseCase import BaseCase
+# clear the database before doing this test
 
 
-class TestGetAllStudents(BaseCase):
+class TestGetAllStudents(unittest.TestCase):
 
     def test_empty_response(self):
-        response = self.app.get('/api/students')
-        self.assertListEqual(response.json, [])
+        response = requests.get('http://localhost:5013/api/students')
+        self.assertEqual(response.text, '[]\n')
         self.assertEqual(response.status_code, 200)
 
     def test_student_response(self):
         # Given
-        student_added = {
-            "uni": "ab1234",
-            "first_name": "David",
-            "last_name": "Martin",
-            "nationality": "United States",
-            "ethnicity": "White",
-            "gender": "Male",
-            "admission_date": "12/14/2022"
-        }
 
-        response = self.app.post('/api/students',
-                                 headers={"Content-Type": "application/json"},
-                                 data=json.dumps(student_added))
-
-        # When
-        response = self.app.get('/api/students')
-        added_student = response.json[0]
+        response = requests.get('http://localhost:5013/api/students')
 
         # Then
-        self.assertEqual(student_added['uni'], added_student['uni'])
-        self.assertEqual(student_added['first_name'], added_student['first_name'])
-        self.assertEqual(student_added['last_name'], added_student['last_name'])
-        self.assertEqual(student_added['nationality'], added_student['nationality'])
-        self.assertEqual(student_added['ethnicity'], added_student['ethnicity'])
-        self.assertEqual(student_added['gender'], added_student['gender'])
-        self.assertEqual(student_added['admission_date'], added_student['admission_date'])
+        print(response.text)
         self.assertEqual(200, response.status_code)

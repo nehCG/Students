@@ -1,14 +1,13 @@
-import json
+import unittest
+import requests
 
-from src.tests.BaseCase import BaseCase
 
-
-class TestAddStudent(BaseCase):
+class TestAddStudent(unittest.TestCase):
 
     def test_successful_add(self):
         # Given
         student_added = {
-            "uni": "ab1234",
+            "uni": "ab1231",
             "first_name": "David",
             "last_name": "Martin",
             "nationality": "United States",
@@ -18,8 +17,8 @@ class TestAddStudent(BaseCase):
         }
 
         # When
-        response = self.app.post('/api/students/new_student',
-                                 headers={"Content-Type": "application/json"},
-                                 data=json.dumps(student_added))
+        response = requests.post('http://localhost:5013/api/students/new_student',
+                                 json=student_added)
         # Then
+        print(response)
         self.assertEqual(200, response.status_code)
