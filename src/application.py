@@ -20,7 +20,7 @@ def add_new_student():
     """
     data = request.json
 
-    if StudentResource.search_student_by_uni(data['uni']) is None:
+    if StudentResource.search_student_by_uni(data['uni']) is not None:
         response = jsonify('Student already exists!')
         response.status_code = 400
         return response

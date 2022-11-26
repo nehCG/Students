@@ -22,10 +22,10 @@ class StudentResource:
     def search_student_by_uni(student_uni):
         res = db.session.query(Student).filter_by(uni=student_uni).first()
         if res is None:
-            return {}
+            return None
 
         student_list = []
-        StudentResource.parse_student_info(res, student_list)
+        StudentResource.parse_student_info([res], student_list)
         return student_list
 
     @staticmethod
@@ -33,8 +33,7 @@ class StudentResource:
         students = db.session.query(Student).all()
 
         student_list = []
-        for student in students:
-            StudentResource.parse_student_info(students, student_list)
+        StudentResource.parse_student_info(students, student_list)
 
         return student_list
 
