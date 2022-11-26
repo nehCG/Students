@@ -1,7 +1,7 @@
 import unittest
 
 from src import app
-from src import db
+from src.database.db import db
 
 
 class BaseCase(unittest.TestCase):
