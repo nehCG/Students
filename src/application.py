@@ -38,7 +38,7 @@ def add_new_student():
     return response
 
 
-@app.route('/api/students/uni', methods=['GET'])
+@app.route('/api/students/<uni>', methods=['GET'])
 def get_one_student(uni):
     """JSON copy to test on Postman
     """
