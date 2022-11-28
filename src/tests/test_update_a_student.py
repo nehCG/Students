@@ -2,13 +2,13 @@ import unittest
 import requests
 
 
-class TestAddStudent(unittest.TestCase):
+class TestDelStudent(unittest.TestCase):
 
-    def test_successful_add(self):
+    def test_successful_Del(self):
         # Given
-        student_added = {
+        student_update = {
             "uni": "ab1234",
-            "first_name": "David",
+            "first_name": "Daviiiid",
             "last_name": "Martin",
             "nationality": "United States",
             "ethnicity": "White",
@@ -17,8 +17,8 @@ class TestAddStudent(unittest.TestCase):
         }
 
         # When
-        response = requests.post('http://localhost:5013/api/students/new_student',
-                                 json=student_added)
+        response = requests.post('http://localhost:5013/api/students/update_student',
+                                 json=student_update)
         # Then
         print(response)
         self.assertEqual(200, response.status_code)

@@ -1,7 +1,7 @@
-drop database if exists courses;
-create database courses;
+drop database if exists students;
+create database students;
 
-use courses;
+use students;
 
 
 drop table if exists section;
