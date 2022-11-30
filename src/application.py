@@ -159,5 +159,4 @@ def get_all_students():
 
 
 if __name__ == '__main__':
-    # this microservice runs on port number 5013
-    app.run(host="0.0.0.0", port=5013)
+    app.run(host="0.0.0.0", port=5012)
