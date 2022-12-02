@@ -37,7 +37,7 @@ def add_new_student():
     return response
 
 
-@app.route("/api/students/del_student", methods=['POST'])
+@app.route("/api/students/del_student", methods=['DELETE'])
 def del_a_student():
     """JSON copy to test on Postman
     {
@@ -57,7 +57,7 @@ def del_a_student():
     return response
 
 
-@app.route("/api/students/update_student", methods=['POST'])
+@app.route("/api/students/update_student", methods=['PUT'])
 def update_a_student():
     """ JSON copy to test on Postman
     {
