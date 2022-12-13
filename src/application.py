@@ -52,11 +52,10 @@ def del_a_student(uni):
     return response
 
 
-@app.route("/api/students/update_student", methods=['POST'])
-def update_a_student():
+@app.route("/api/students/update_student/<uni>", methods=['PUT'])
+def update_a_student(uni):
     """ JSON copy to test on Postman
     {
-        "uni": "ab1234",
         "first_name": "Daviiiid",
         "last_name": "Martin",
         "nationality": "United States",
@@ -66,12 +65,12 @@ def update_a_student():
     }
     """
     data = request.json
-    if StudentResource.search_student_by_uni(data['uni']) is None:
+    if StudentResource.search_student_by_uni(uni) is None:
         response = jsonify('Student does not exist!')
         response.status_code = 400
         return response
 
-    StudentResource.update_a_student(data['uni'],
+    StudentResource.update_a_student(uni,
                                      data['first_name'],
                                      data['last_name'],
                                      data['nationality'],
