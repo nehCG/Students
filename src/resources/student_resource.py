@@ -7,12 +7,12 @@ class StudentResource:
         pass
 
     @staticmethod
-    def add_new_student(uni, first_name, last_name, nationality, ethnicity, gender, admission_date):
+    def add_new_student(uni, first_name, last_name, nationality, race, gender, admission_date):
         student = Student(uni=uni,
                           first_name=first_name,
                           last_name=last_name,
                           nationality=nationality,
-                          ethnicity=ethnicity,
+                          race=race,
                           gender=gender,
                           admission_date=admission_date)
         db.session.add(student)
@@ -25,13 +25,13 @@ class StudentResource:
         db.session.commit()
 
     @staticmethod
-    def update_a_student(uni, first_name, last_name, nationality, ethnicity, gender, admission_date):
+    def update_a_student(uni, first_name, last_name, nationality, race, gender, admission_date):
         student = db.session.query(Student).filter_by(uni=uni).update({
                           'uni': uni,
                           'first_name': first_name,
                           'last_name': last_name,
                           'nationality': nationality,
-                          'ethnicity': ethnicity,
+                          'race': race,
                           'gender': gender,
                           'admission_date': admission_date})
         db.session.commit()
@@ -62,7 +62,7 @@ class StudentResource:
                             'first_name': student.first_name,
                             'last_name': student.last_name,
                             'nationality': student.nationality,
-                            'ethnicity': student.ethnicity,
+                            'race': student.race,
                             'gender': student.gender,
                             'admission_date': student.admission_date}
             student_list.append(student_dict)

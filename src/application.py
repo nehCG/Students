@@ -13,7 +13,7 @@ def add_new_student():
         "first_name": "David",
         "last_name": "Martin",
         "nationality": "United States",
-        "ethnicity": "White",
+        "race": "White",
         "gender": "Male",
         "admission_date": "12/14/2022"
     }
@@ -28,7 +28,7 @@ def add_new_student():
                                     data['first_name'],
                                     data['last_name'],
                                     data['nationality'],
-                                    data['ethnicity'],
+                                    data['race'],
                                     data['gender'],
                                     data['admission_date'])
 
@@ -37,50 +37,44 @@ def add_new_student():
     return response
 
 
-@app.route("/api/students/del_student", methods=['POST'])
-def del_a_student():
-    """JSON copy to test on Postman
-    {
-        "uni": "12345678"
-    }
-    """
-    data = request.json
-    if StudentResource.search_student_by_uni(data['uni']) is None:
+@app.route("/api/students/del_student/<uni>", methods=['DELETE'])
+def del_a_student(uni):
+
+    if StudentResource.search_student_by_uni(uni) is None:
         response = jsonify('Student does not exist!')
         response.status_code = 400
         return response
 
-    StudentResource.del_a_student(data['uni'])
+    StudentResource.del_a_student(uni)
 
     response = jsonify('Successfully deleted')
     response.status_code = 302
     return response
 
 
-@app.route("/api/students/update_student", methods=['POST'])
-def update_a_student():
+@app.route("/api/students/update_student/<uni>", methods=['PUT'])
+def update_a_student(uni):
     """ JSON copy to test on Postman
     {
-        "uni": "ab1234",
         "first_name": "Daviiiid",
         "last_name": "Martin",
         "nationality": "United States",
-        "ethnicity": "White",
+        "race": "White",
         "gender": "Male",
         "admission_date": "12/14/2022"
     }
     """
     data = request.json
-    if StudentResource.search_student_by_uni(data['uni']) is None:
+    if StudentResource.search_student_by_uni(uni) is None:
         response = jsonify('Student does not exist!')
         response.status_code = 400
         return response
 
-    StudentResource.update_a_student(data['uni'],
+    StudentResource.update_a_student(uni,
                                      data['first_name'],
                                      data['last_name'],
                                      data['nationality'],
-                                     data['ethnicity'],
+                                     data['race'],
                                      data['gender'],
                                      data['admission_date'])
 
@@ -95,7 +89,7 @@ def get_one_student(uni):
     [
         {
             "admission_date": "12/08/2022",
-            "ethnicity": "Asian",
+            "race": "Asian",
             "first_name": "Di",
             "gender": "Female",
             "last_name": "Wu",
@@ -116,7 +110,7 @@ def get_one_student(uni):
 #     """ JSON copy to test
 #     {
 #         "admission_date": "",
-#         "ethnicity": "Asian",
+#         "race": "Asian",
 #         "first_name": "",
 #         "gender": "",
 #         "last_name": "",
@@ -139,7 +133,7 @@ def get_all_students():
     [
         {
         "admission_date": "12/14/2022",
-        "ethnicity": "White",
+        "race": "White",
         "first_name": "David",
         "gender": "Male",
         "last_name": "Martin",
@@ -159,5 +153,4 @@ def get_all_students():
 
 
 if __name__ == '__main__':
-    # this microservice runs on port number 5013
-    app.run(host="0.0.0.0", port=5013)
+    app.run(host="0.0.0.0", port=5012)
