@@ -13,7 +13,7 @@ app = Flask(__name__,
             template_folder='web/templates')
 
 # Need to change username and password before running application.py
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:dbuserbdbuser@localhost/courses'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/students'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 

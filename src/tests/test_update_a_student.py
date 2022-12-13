@@ -11,7 +11,7 @@ class TestDelStudent(unittest.TestCase):
             "first_name": "Daviiiid",
             "last_name": "Martin",
             "nationality": "United States",
-            "ethnicity": "White",
+            "race": "White",
             "gender": "Male",
             "admission_date": "12/14/2022"
         }
