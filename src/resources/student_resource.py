@@ -55,6 +55,16 @@ class StudentResource:
 
         return student_list
 
+
+    @staticmethod
+    def get_all_names():
+        students = db.session.query(Student).all()
+
+        student_name_dict = {}
+        for student in students:
+            student_name_dict[student.uni] = f'{student.first_name} {student.last_name}'
+        return student_name_dict
+
     @staticmethod
     def parse_student_info(students, student_list):
         for student in students:

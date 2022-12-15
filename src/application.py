@@ -152,5 +152,14 @@ def get_all_students():
     return response
 
 
+@app.route('/api/student_names', methods=['GET'])
+def get_all_students_names():
+    student_names = StudentResource.get_all_names()
+
+    response = jsonify(student_names)
+    response.status_code = 200
+    return response
+
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5012)
